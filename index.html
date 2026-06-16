@@ -4,34 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>あなたに合う副業診断</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #f9f9f7; color: #1a1a1a; }
-.wrap { max-width: 600px; margin: 0 auto; padding: 2rem 1rem; }
-h1 { font-size: 20px; font-weight: 500; text-align: center; margin-bottom: 2rem; color: #1a1a1a; }
-.progress-bar-bg { background: #e8e8e8; border-radius: 99px; height: 6px; margin-bottom: 2rem; }
-.progress-bar-fill { background: #7F77DD; height: 6px; border-radius: 99px; transition: width 0.3s; }
-.q-num { font-size: 13px; color: #888; margin-bottom: 0.5rem; }
-.q-text { font-size: 18px; font-weight: 500; color: #1a1a1a; margin-bottom: 1.5rem; line-height: 1.5; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f0fafa; color: #2d4a4a; min-height: 100vh; }
+.wrap { max-width: 580px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+
+.header { text-align: center; margin-bottom: 2.5rem; }
+.header-icon { font-size: 32px; margin-bottom: 0.5rem; }
+.header h1 { font-size: 20px; font-weight: 500; color: #2d4a4a; letter-spacing: 0.05em; margin-bottom: 4px; }
+.header p { font-size: 13px; color: #7aabab; }
+
+.progress-wrap { margin-bottom: 2rem; }
+.progress-label { display: flex; justify-content: space-between; font-size: 12px; color: #7aabab; margin-bottom: 6px; }
+.progress-bar-bg { background: #d4f0ee; border-radius: 99px; height: 5px; }
+.progress-bar-fill { background: linear-gradient(90deg, #5dbfbf, #7dd4d4); height: 5px; border-radius: 99px; transition: width 0.4s ease; }
+
+.q-text { font-size: 17px; font-weight: 500; color: #2d4a4a; margin-bottom: 1.5rem; line-height: 1.6; text-align: center; }
 .options { display: flex; flex-direction: column; gap: 10px; }
-.opt-btn { background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 14px 16px; font-size: 15px; color: #1a1a1a; cursor: pointer; text-align: left; transition: border-color 0.15s, background 0.15s; }
-.opt-btn:hover { border-color: #7F77DD; background: #EEEDFE; color: #3C3489; }
-.result-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; }
-.result-label { font-size: 14px; color: #888; margin-bottom: 4px; }
-.result-title { font-size: 26px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.5rem; }
-.result-badge { display: inline-block; background: #EEEDFE; color: #3C3489; font-size: 12px; padding: 4px 12px; border-radius: 8px; margin-bottom: 1.25rem; }
-.result-desc { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 1.5rem; }
-.reason-box { background: #f5f5f3; border-radius: 8px; padding: 14px 16px; font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 1.5rem; }
-.reason-box strong { color: #1a1a1a; font-weight: 500; }
-.affiliate-slot-label { font-size: 11px; color: #aaa; margin-bottom: 6px; letter-spacing: 0.05em; }
-.affiliate-slot { border: 1px dashed #ccc; border-radius: 12px; padding: 1.25rem; text-align: center; color: #aaa; font-size: 14px; margin-bottom: 1rem; }
-.retry-btn { background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 12px 24px; font-size: 14px; color: #888; cursor: pointer; }
-.retry-btn:hover { border-color: #7F77DD; color: #3C3489; }
+.opt-btn {
+  background: #fff;
+  border: 1.5px solid #c8e8e8;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #2d4a4a;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.opt-btn::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #c8e8e8; display: inline-block; margin-right: 10px; transition: background 0.2s; }
+.opt-btn:hover { border-color: #5dbfbf; background: #edfafa; color: #2d8080; }
+.opt-btn:hover::before { background: #5dbfbf; }
+
+.result-card { background: #fff; border: 1.5px solid #c8e8e8; border-radius: 20px; padding: 2rem; margin-bottom: 1rem; }
+.result-top { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #d4f0ee; }
+.result-icon { font-size: 40px; margin-bottom: 0.75rem; }
+.result-label { font-size: 12px; color: #7aabab; letter-spacing: 0.08em; margin-bottom: 6px; }
+.result-title { font-size: 24px; font-weight: 500; color: #2d4a4a; margin-bottom: 0.75rem; }
+.result-badge { display: inline-block; background: #edfafa; color: #2d8080; font-size: 12px; padding: 5px 14px; border-radius: 99px; border: 1px solid #c8e8e8; }
+.result-desc { font-size: 14px; color: #557070; line-height: 1.9; margin-bottom: 1.5rem; }
+.reason-box { background: #f0fafa; border-radius: 12px; padding: 14px 16px; font-size: 13px; color: #557070; line-height: 1.8; margin-bottom: 1.5rem; border-left: 3px solid #5dbfbf; border-radius: 0 12px 12px 0; }
+.reason-box strong { color: #2d8080; font-weight: 500; }
+.slot-label { font-size: 11px; color: #7aabab; letter-spacing: 0.08em; margin-bottom: 8px; text-align: center; }
+.affiliate-slot { border: 1.5px dashed #c8e8e8; border-radius: 14px; padding: 1.25rem; text-align: center; color: #7aabab; font-size: 13px; background: #fafefe; }
+.retry-btn { width: 100%; background: #fff; border: 1.5px solid #c8e8e8; border-radius: 14px; padding: 13px; font-size: 14px; font-family: 'Noto Sans JP', sans-serif; color: #7aabab; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+.retry-btn:hover { border-color: #5dbfbf; color: #2d8080; background: #edfafa; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>あなたに合う副業診断</h1>
+  <div class="header">
+    <div class="header-icon">🌿</div>
+    <h1>あなたに合う副業診断</h1>
+    <p>15の質問であなたにぴったりの副業がわかります</p>
+  </div>
   <div id="app"></div>
 </div>
 <script>
@@ -129,55 +158,13 @@ const questions = [
 ];
 
 const results = {
-  furima: {
-    name: "フリマ・物販",
-    badge: "即金性◎ スマホだけでOK",
-    desc: "メルカリ・ラクマなどを使って不用品を売ったり、商品を仕入れて転売する副業です。スマホ1台で今日から始められ、売れた瞬間に収入が入る即金性の高さが魅力。物を見る目が育つと、せどりや輸入販売へも広げていけます。",
-    reason: "直感的に行動できて、スキマ時間を上手に使えるあなたにぴったりです。難しい知識がなくてもすぐ始められ、実践しながらコツをつかんでいけます。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  },
-  sns: {
-    name: "SNS運用・Threads",
-    badge: "発信が資産になる 長期収入型",
-    desc: "ThreadsやXで情報を発信してフォロワーを増やし、アフィリエイトや案件収入につなげる副業です。自分の体験や知識をそのままコンテンツにできるため、ネタ切れしにくく、フォロワーが増えるほど収入の選択肢が広がっていきます。",
-    reason: "人と関わるのが好きで、発信を楽しめるあなたに向いています。自分らしさをそのまま発信できる人が伸びやすいジャンルです。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  },
-  uranai: {
-    name: "占い・スピリチュアル系",
-    badge: "高単価案件あり 共感力が武器",
-    desc: "電話占いサービスへの登録やオンライン鑑定で収入を得る副業です。アフィリエイトでの紹介報酬は1件5,000〜8,000円と高単価で、少ない成約数でも収益になりやすいのが特徴です。インスタやThreadsでの占いコンテンツは女性層に特に人気があります。",
-    reason: "人の気持ちに寄り添うのが得意で、直感派のあなたにぴったり。スピリチュアルへの親和性がそのまま強みになります。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  },
-  cloud: {
-    name: "クラウドソーシング",
-    badge: "スキルが収入に直結 安定型",
-    desc: "クラウドワークスやランサーズで、ライティング・データ入力・デザインなどの仕事を受注する副業です。特別なスキルがなくても簡単な案件からスタートでき、実績を積むほど受注単価が上がっていきます。",
-    reason: "コツコツ作業が得意で、スキルを着実に伸ばしたいあなたに向いています。努力した分だけ収入に反映されるのが魅力です。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  },
-  affiliate: {
-    name: "アフィリエイト・ブログ",
-    badge: "寝ている間も稼げる 資産型副業",
-    desc: "ブログやSNSで商品・サービスを紹介し、成果報酬を得る副業です。一度書いた記事が継続的に収益を生む「自動収入」を作れるのが最大の魅力で、記事が増えるほど収入も安定していきます。",
-    reason: "情報収集や文章作成が得意で、長期的な視点で取り組めるあなたに最適です。コツコツ積み上げることで大きな資産になります。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  },
-  ai: {
-    name: "AIスクール・AI副業",
-    badge: "2025年最注目 スキルが一生モノ",
-    desc: "ChatGPTやClaudeなどのAIツールを活用して収入につなげる副業です。AIを使ったライティング代行・コンテンツ作成・教材販売など幅が広く、AIスキルを持つ人材への需要は今後もますます高まっていきます。",
-    reason: "論理的思考があり、新しいことへの好奇心が高いあなたにぴったり。学んだスキルが直接収益につながり、将来性も抜群です。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  },
-  toushi: {
-    name: "投資スクール・資産運用",
-    badge: "お金にお金を稼がせる 長期資産形成",
-    desc: "NISA・株・FXなどを学び、資産を増やしていく副業です。投資スクールのアフィリエイト（1件3,000〜10,000円）から始めて、自分でも実践する「学びながら稼ぐ」スタイルが人気です。新NISAをきっかけに関心が高まっており、今まさに需要が高いジャンルです。",
-    reason: "数字やデータを扱うのが好きで、長期的な視点があるあなたに向いています。副業と将来の資産形成を同時に進められます。",
-    slot: "👉 おすすめスクールのリンクをここに貼る"
-  }
+  furima: { icon: "🛍️", name: "フリマ・物販", badge: "即金性◎ スマホだけでOK", desc: "メルカリ・ラクマなどを使って不用品を売ったり、商品を仕入れて転売する副業です。スマホ1台で今日から始められ、売れた瞬間に収入が入る即金性の高さが魅力。物を見る目が育つと、せどりや輸入販売へも広げていけます。", reason: "直感的に行動できて、スキマ時間を上手に使えるあなたにぴったりです。難しい知識がなくてもすぐ始められ、実践しながらコツをつかんでいけます。", slot: "👉 おすすめスクールのリンクをここに貼る" },
+  sns: { icon: "📱", name: "SNS運用・Threads", badge: "発信が資産になる 長期収入型", desc: "ThreadsやXで情報を発信してフォロワーを増やし、アフィリエイトや案件収入につなげる副業です。自分の体験や知識をそのままコンテンツにできるため、ネタ切れしにくく、フォロワーが増えるほど収入の選択肢が広がっていきます。", reason: "人と関わるのが好きで、発信を楽しめるあなたに向いています。自分らしさをそのまま発信できる人が伸びやすいジャンルです。", slot: "👉 おすすめスクールのリンクをここに貼る" },
+  uranai: { icon: "🔮", name: "占い・スピリチュアル系", badge: "高単価案件あり 共感力が武器", desc: "電話占いサービスへの登録やオンライン鑑定で収入を得る副業です。アフィリエイトでの紹介報酬は1件5,000〜8,000円と高単価で、少ない成約数でも収益になりやすいのが特徴です。インスタやThreadsでの占いコンテンツは女性層に特に人気があります。", reason: "人の気持ちに寄り添うのが得意で、直感派のあなたにぴったり。スピリチュアルへの親和性がそのまま強みになります。", slot: "👉 おすすめスクールのリンクをここに貼る" },
+  cloud: { icon: "💻", name: "クラウドソーシング", badge: "スキルが収入に直結 安定型", desc: "クラウドワークスやランサーズで、ライティング・データ入力・デザインなどの仕事を受注する副業です。特別なスキルがなくても簡単な案件からスタートでき、実績を積むほど受注単価が上がっていきます。", reason: "コツコツ作業が得意で、スキルを着実に伸ばしたいあなたに向いています。努力した分だけ収入に反映されるのが魅力です。", slot: "👉 おすすめスクールのリンクをここに貼る" },
+  affiliate: { icon: "✍️", name: "アフィリエイト・ブログ", badge: "寝ている間も稼げる 資産型副業", desc: "ブログやSNSで商品・サービスを紹介し、成果報酬を得る副業です。一度書いた記事が継続的に収益を生む「自動収入」を作れるのが最大の魅力で、記事が増えるほど収入も安定していきます。", reason: "情報収集や文章作成が得意で、長期的な視点で取り組めるあなたに最適です。コツコツ積み上げることで大きな資産になります。", slot: "👉 おすすめスクールのリンクをここに貼る" },
+  ai: { icon: "🤖", name: "AIスクール・AI副業", badge: "2025年最注目 スキルが一生モノ", desc: "ChatGPTやClaudeなどのAIツールを活用して収入につなげる副業です。AIを使ったライティング代行・コンテンツ作成・教材販売など幅が広く、AIスキルを持つ人材への需要は今後もますます高まっていきます。", reason: "論理的思考があり、新しいことへの好奇心が高いあなたにぴったり。学んだスキルが直接収益につながり、将来性も抜群です。", slot: "👉 おすすめスクールのリンクをここに貼る" },
+  toushi: { icon: "📈", name: "投資スクール・資産運用", badge: "お金にお金を稼がせる 長期資産形成", desc: "NISA・株・FXなどを学び、資産を増やしていく副業です。投資スクールのアフィリエイト（1件3,000〜10,000円）から始めて、自分でも実践する「学びながら稼ぐ」スタイルが人気です。新NISAをきっかけに関心が高まっており、今まさに需要が高いジャンルです。", reason: "数字やデータを扱うのが好きで、長期的な視点があるあなたに向いています。副業と将来の資産形成を同時に進められます。", slot: "👉 おすすめスクールのリンクをここに貼る" }
 };
 
 let current = 0;
@@ -189,8 +176,10 @@ function render() {
   const q = questions[current];
   const pct = Math.round((current / questions.length) * 100);
   app.innerHTML = `
-    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
-    <div class="q-num">質問 ${current + 1} / ${questions.length}</div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>Q${current + 1} / ${questions.length}</span><span>${pct}%</span></div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+    </div>
     <div class="q-text">${q.text}</div>
     <div class="options">${q.options.map((o, i) => `<button class="opt-btn" onclick="answer(${i})">${o.text}</button>`).join('')}</div>
   `;
@@ -208,15 +197,18 @@ function showResult(app) {
   const r = results[top];
   app.innerHTML = `
     <div class="result-card">
-      <div class="result-label">あなたに合う副業は</div>
-      <div class="result-title">${r.name}</div>
-      <div class="result-badge">${r.badge}</div>
+      <div class="result-top">
+        <div class="result-icon">${r.icon}</div>
+        <div class="result-label">あなたに合う副業は</div>
+        <div class="result-title">${r.name}</div>
+        <div class="result-badge">${r.badge}</div>
+      </div>
       <div class="result-desc">${r.desc}</div>
       <div class="reason-box"><strong>あなたに向いている理由：</strong>${r.reason}</div>
-      <div style="font-size:11px;color:#aaa;margin-bottom:6px;letter-spacing:0.05em;">おすすめスクール</div>
-      <div style="border:1px dashed #ccc;border-radius:12px;padding:1.25rem;text-align:center;color:#aaa;font-size:14px;margin-bottom:1rem;">${r.slot}</div>
+      <div class="slot-label">おすすめスクール</div>
+      <div class="affiliate-slot">${r.slot}</div>
     </div>
-    <button class="retry-btn" onclick="restart()">もう一度診断する</button>
+    <button class="retry-btn" onclick="restart()">↩ もう一度診断する</button>
   `;
 }
 
