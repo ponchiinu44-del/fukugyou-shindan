@@ -16,3 +16,4 @@ X・Instagram は認証なしで個別投稿の数値（いいね・再生数）
 ## 履歴
 
 - 2026-06-22：初回。X / Instagram / YouTube 各10本 ＋ Threads バズの法則。
+- 2026-06-24：X / Instagram / YouTube 各10本（例文付き）＋ Threads 三段構成テンプレ。新潮流：オリジナル＆冒頭フック重視、Xは集客導線、Threadsは「結論→具体例→問いかけ」。
