@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>収集データ一覧｜SNSトレンド（占い・副業・アフィリエイト）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f0fafa; color: #2d4a4a; min-height: 100vh; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+.header { text-align: center; margin-bottom: 1.5rem; }
+.header-icon { font-size: 32px; margin-bottom: 0.5rem; }
+.header h1 { font-size: 20px; font-weight: 500; color: #2d4a4a; letter-spacing: 0.05em; margin-bottom: 4px; }
+.header p { font-size: 13px; color: #7aabab; }
+.meta { text-align: center; font-size: 12px; color: #b89878; margin-bottom: 1.5rem; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 2rem; }
+.filter-btn { background: #fff; border: 1.5px solid #c8e8e8; border-radius: 99px; padding: 7px 16px; font-size: 13px; font-family: 'Noto Sans JP', sans-serif; color: #557070; cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { border-color: #5dbfbf; color: #2d8080; }
+.filter-btn.active { background: #5dbfbf; border-color: #5dbfbf; color: #fff; }
+.card { background: #fff; border: 1.5px solid #c8e8e8; border-radius: 18px; padding: 1.5rem; margin-bottom: 1rem; }
+.card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem; }
+.card-icon { font-size: 28px; }
+.card-title { font-size: 17px; font-weight: 500; color: #2d4a4a; }
+.card-badge { display: inline-block; background: #edfafa; color: #2d8080; font-size: 11px; padding: 4px 12px; border-radius: 99px; border: 1px solid #c8e8e8; margin-top: 4px; }
+.card-theme { font-size: 11px; color: #c47a2c; background: #fff7ed; border: 1px solid #f0cfa8; border-radius: 99px; padding: 3px 10px; margin-left: auto; white-space: nowrap; }
+.trend-list { list-style: none; margin: 1rem 0 0; padding: 0; }
+.trend-list li { position: relative; padding-left: 18px; margin-bottom: 8px; font-size: 13px; color: #557070; line-height: 1.8; }
+.trend-list li::before { content: '▸'; position: absolute; left: 0; color: #f0a868; }
+.sources { background: #fff; border: 1.5px dashed #c8e8e8; border-radius: 14px; padding: 1.25rem; margin-top: 2rem; }
+.sources h2 { font-size: 13px; color: #2d8080; font-weight: 500; margin-bottom: 0.75rem; }
+.sources ul { list-style: none; padding: 0; }
+.sources li { margin-bottom: 6px; font-size: 12px; line-height: 1.6; }
+.sources a { color: #5dbfbf; text-decoration: none; word-break: break-all; }
+.sources a:hover { text-decoration: underline; }
+.back { display: inline-block; margin-top: 1.5rem; font-size: 13px; color: #7aabab; text-decoration: none; }
+.back:hover { color: #2d8080; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="header-icon">📊</div>
+    <h1>収集データ一覧</h1>
+    <p>X・Instagram・YouTube で伸びているSNSトレンド</p>
+  </div>
+  <div class="meta" id="meta"></div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-theme="all">すべて</button>
+    <button class="filter-btn" data-theme="占い">🔮 占い</button>
+    <button class="filter-btn" data-theme="副業">💼 副業</button>
+    <button class="filter-btn" data-theme="アフィリ">✍️ アフィリエイト</button>
+  </div>
+
+  <div id="list"></div>
+
+  <div class="sources">
+    <h2>📚 リサーチ参照元（2026-06-25 時点）</h2>
+    <ul>
+      <li><a href="https://uranai-compass.com/articles/fortune-teller-sns-viral-strategy" target="_blank" rel="noopener">占い師がTikTokでバズる5つの型｜2026年に伸びた事例10選 - 占いコンパス</a></li>
+      <li><a href="https://venust.jp/2026-uranai-aisinspi-neojidai/" target="_blank" rel="noopener">2026年、占いは「AI×スピリチュアル」の新時代へ - ヴィーナスタロット</a></li>
+      <li><a href="https://lani.co.jp/youtube-tarot-scary-accurate" target="_blank" rel="noopener">怖いほど当たるタロット占いYouTube16選 - lani</a></li>
+      <li><a href="https://note.com/hasekinn/n/n8d22b5fdec5f" target="_blank" rel="noopener">Threads開始3週間で月10万円 - note（リツアンSTC長谷川）</a></li>
+      <li><a href="https://freelife-marke.com/threads/" target="_blank" rel="noopener">Threadsで収益化！マネタイズ＆アフィリエイト5選 - メシマーケ</a></li>
+      <li><a href="https://biz.moneyforward.com/tax_return/basic/81304/" target="_blank" rel="noopener">インスタグラムで儲かる仕組み - マネーフォワード</a></li>
+      <li><a href="https://theapps.jp/affiliate-navi/807/" target="_blank" rel="noopener">アフィリエイトするならどのSNS？おすすめ4選 - Appsアフィリエイトナビ</a></li>
+      <li><a href="https://digital-hacks.jp/blog/archives/7938" target="_blank" rel="noopener">2026年にYouTubeで狙い目なジャンル10選 - デジハクmagazine</a></li>
+      <li><a href="https://news.yahoo.co.jp/articles/9c4e67151bb415fe23209de3498d2f29abf1ad70" target="_blank" rel="noopener">注目の高収益「副業15選」 - Forbes JAPAN / Yahoo!ニュース</a></li>
+    </ul>
+  </div>
+
+  <a class="back" href="index.html">↩ 診断ページに戻る</a>
+</div>
+
+<script>
+// index.html の results と同じデータ。theme で 占い/副業/アフィリ に分類。
+const data = [
+  { icon: "🔮", name: "占い・スピリチュアル系", badge: "高単価案件あり 共感力が武器", theme: "占い",
+    trends: ["TikTokはフォロワー数より動画の質で拡散 → ゼロからでもバズるチャンス", "「恋愛」「金運」「転職運」などテーマ特化が鉄則。専門性で覚えてもらう", "2026年は「AI×スピリチュアル」が新潮流。AI占いを無料の入口にして電話占いへ誘導"] },
+  { icon: "📱", name: "SNS運用・Threads", badge: "発信が資産になる 長期収入型", theme: "副業",
+    trends: ["Threadsが月間1.4億ユーザーでXを凌駕。「最も稼ぎやすいブルーオーシャン」として発信者が集中", "Threadsはコメント・いいねで拡散 → 議論を生む「巻き込み型」投稿が伸びる", "Xは「滞在時間」が最重要。2分以上読まれるといいねの11〜22倍の評価がつく"] },
+  { icon: "🛍️", name: "フリマ・物販", badge: "即金性◎ スマホだけでOK", theme: "副業",
+    trends: ["Instagram・TikTokの「商品紹介リール」が拡散の主役。3分以内の短尺が伸びやすい", "ビフォーアフターや開封動画は保存率が高く、Instagramでおすすめ表示されやすい", "無在庫販売×外注化が2026年の伸び筋。AIで商品リサーチを効率化する人が増加中"] },
+  { icon: "💻", name: "クラウドソーシング", badge: "スキルが収入に直結 安定型", theme: "副業",
+    trends: ["Xで制作実績やノウハウを発信すると、滞在時間が伸びて指名案件につながりやすい", "AIツール（生成AI）と組み合わせて作業を効率化する人材の需要が急増", "インバウンド関連（多言語翻訳・外国人向けSNS運用）が月3〜15万円相場で伸び筋"] },
+  { icon: "🤖", name: "AIスクール・AI副業", badge: "2026年最注目 スキルが一生モノ", theme: "副業",
+    trends: ["「AI×占い」「AI×副業」「AI×アフィリ」と、全ジャンル共通の伸びテーマ", "新ツールが毎日リリースされるためネタ切れしにくく、SNS発信と相性抜群", "未経験でも質の高い出力が可能になり、参入ハードルが大きく下がった"] },
+  { icon: "✍️", name: "アフィリエイト・ブログ", badge: "寝ている間も稼げる 資産型副業", theme: "アフィリ",
+    trends: ["Instagramは「暮らし・節約・収納」「美容」「料理」が鉄板。保存率重視で企業案件にも繋がる", "VOD（Netflix・Amazon Prime・U-NEXT）の無料体験登録系は成果が出やすく初心者向き", "YouTubeのガジェット・家電レビューは資産性が高く、長期で再生され続ける"] },
+  { icon: "📈", name: "投資スクール・資産運用", badge: "お金にお金を稼がせる 長期資産形成", theme: "アフィリ",
+    trends: ["YouTubeの「投資・副業・ビジネス解説」は資産性が高く、初心者向け検索で安定再生", "Xでは実績・根拠を添えた発信が滞在時間を伸ばし、信頼につながる", "新NISAをきっかけに関心が継続。教育系コンテンツの需要が高止まり"] }
+];
+
+document.getElementById('meta').textContent =
+  '全' + data.length + 'ジャンル ／ 最終更新：' + new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+
+function render(theme) {
+  const list = document.getElementById('list');
+  const items = theme === 'all' ? data : data.filter(d => d.theme === theme);
+  list.innerHTML = items.map(d => `
+    <div class="card">
+      <div class="card-head">
+        <span class="card-icon">${d.icon}</span>
+        <div>
+          <div class="card-title">${d.name}</div>
+          <span class="card-badge">${d.badge}</span>
+        </div>
+        <span class="card-theme">${d.theme}</span>
+      </div>
+      <ul class="trend-list">${d.trends.map(t => `<li>${t}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render(btn.dataset.theme);
+  });
+});
+
+render('all');
+</script>
+</body>
+</html>
