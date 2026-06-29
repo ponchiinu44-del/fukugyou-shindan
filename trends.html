@@ -27,6 +27,16 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f0fafa; color: #2d4
 .trend-list { list-style: none; margin: 1rem 0 0; padding: 0; }
 .trend-list li { position: relative; padding-left: 18px; margin-bottom: 8px; font-size: 13px; color: #557070; line-height: 1.8; }
 .trend-list li::before { content: '▸'; position: absolute; left: 0; color: #f0a868; }
+.section-title { font-size: 16px; font-weight: 500; color: #2d4a4a; margin: 2.5rem 0 0.25rem; }
+.section-sub { font-size: 12px; color: #b89878; margin-bottom: 1.25rem; }
+.neta-card { background: #fffdf7; border: 1.5px solid #f0cfa8; border-radius: 18px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.neta-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.neta-icon { font-size: 24px; }
+.neta-title { font-size: 16px; font-weight: 500; color: #2d4a4a; }
+.neta-timing { font-size: 12px; color: #c47a2c; background: #fff3e2; border-radius: 8px; padding: 8px 12px; margin: 8px 0 10px; line-height: 1.6; }
+.neta-list { list-style: none; margin: 0; padding: 0; counter-reset: neta; }
+.neta-list li { position: relative; padding-left: 26px; margin-bottom: 8px; font-size: 13px; color: #557070; line-height: 1.8; counter-increment: neta; }
+.neta-list li::before { content: counter(neta); position: absolute; left: 0; top: 2px; width: 18px; height: 18px; background: #f0a868; color: #fff; border-radius: 50%; font-size: 11px; text-align: center; line-height: 18px; }
 .sources { background: #fff; border: 1.5px dashed #c8e8e8; border-radius: 14px; padding: 1.25rem; margin-top: 2rem; }
 .sources h2 { font-size: 13px; color: #2d8080; font-weight: 500; margin-bottom: 0.75rem; }
 .sources ul { list-style: none; padding: 0; }
@@ -54,6 +64,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f0fafa; color: #2d4
   </div>
 
   <div id="list"></div>
+
+  <div class="section-title">📝 今日のネタ（SNS投稿の題材）</div>
+  <div class="section-sub" id="neta-meta"></div>
+  <div id="neta-list"></div>
 
   <div class="sources">
     <h2>📚 リサーチ参照元（2026-06-25 時点）</h2>
@@ -92,8 +106,29 @@ const data = [
     trends: ["YouTubeの「投資・副業・ビジネス解説」は資産性が高く、初心者向け検索で安定再生", "Xでは実績・根拠を添えた発信が滞在時間を伸ばし、信頼につながる", "新NISAをきっかけに関心が継続。教育系コンテンツの需要が高止まり"] }
 ];
 
+// 今日のネタ（季節性・時事性のある投稿題材）。3ジャンル分。
+const neta = [
+  { icon: "🔮", title: "占い", timing: "タイミング：2026下半期スタート直前。6月に木星が獅子座へ移動し「守りから攻めへ」の転換期。9月から12年に一度の獅子座大幸運期へ。",
+    ideas: ["「2026年下半期、運気が爆上がりする星座TOP3」（ランキングは保存・拡散されやすい）", "下半期のテーマは“選択とやり抜く力”。今手放すべきもの（タロット1枚引き）", "獅子座大幸運期まであと約2ヶ月。今のうちに仕込むべき準備", "7月は土星逆行 →“始めたことを続けられるか”が試される月", "双子座向け：下半期はSNS・発信が追い風。今が始めどき（占い×副業）"] },
+  { icon: "💼", title: "副業", timing: "タイミング：夏ボーナス＆連休で「始めたい人」が急増する時期。",
+    ideas: ["ボーナスを“消費”で終わらせない。2万円を元手に始める副業3選", "下半期に伸びる副業＝AI×発信。未経験でも質の高い出力ができる時代", "#PR表示の義務化、知らないと危険。SNS副業の正しいルール（注意喚起系）", "Threads副業、なぜ今ブルーオーシャンなのか（X離れの受け皿）", "夏休み前に仕込む。ライブ配信副業の始め方（必要機材リスト付き）"] },
+  { icon: "✍️", title: "アフィリエイト", timing: "タイミング：夏商材が稼ぎ時。鉄則はピークの1〜1.5ヶ月前に記事投入。7月はニキビ系が年間最高に売れる月。",
+    ideas: ["「毛穴・黒ずみ・ニキビ」夏のスキンケア比較（7月の最売れジャンル）", "日焼け止め2026、ベタつかない神UVランキング", "冷感グッズ＆サーキュレーターで電気代を下げる（猛暑×節約）", "海・プールの準備リスト（ラッシュガード・水着）", "夏のVOD無料体験で連休を乗り切る（無料登録系は初心者向き）"] }
+];
+
+const todayStr = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+
 document.getElementById('meta').textContent =
-  '全' + data.length + 'ジャンル ／ 最終更新：' + new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+  '全' + data.length + 'ジャンル ／ 最終更新：' + todayStr;
+document.getElementById('neta-meta').textContent = todayStr + ' 時点のリサーチより（季節性・時事性のあるネタ）';
+
+document.getElementById('neta-list').innerHTML = neta.map(n => `
+  <div class="neta-card">
+    <div class="neta-head"><span class="neta-icon">${n.icon}</span><span class="neta-title">${n.title}</span></div>
+    <div class="neta-timing">${n.timing}</div>
+    <ul class="neta-list">${n.ideas.map(i => `<li>${i}</li>`).join('')}</ul>
+  </div>
+`).join('');
 
 function render(theme) {
   const list = document.getElementById('list');
